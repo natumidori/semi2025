@@ -10,13 +10,13 @@
 echo '<div class="upload_text">';
 $time= date('y-m-d h-i-s');
 $summary=$_POST['summary'] ;//ファイル説明の習得
-$upload = './uploaded/'.$_FILES['files']['name']; //ファイルの保存先指定
+$upload = './file/'.$_FILES['files']['name']; //ファイルの保存先指定
 $upload_file = $_FILES['files']['name'];//習得ファイルの名前
 $ext = pathinfo($upload_file,PATHINFO_EXTENSION);//拡張子を習得
 $tempfile=$_FILES['files']['tmp_name'];//サーバに一時保存
 $md=substr(md5($time.$upload_file),16,8);//ハッシュ関数
 $md_csv=$md.'.pdf';
-$md_='./uploaded/'.$md.'.pdf';
+$md_='./file/'.$md.'.pdf';
 $file_csv = "file.csv";
 $file2_csv = fopen($file_csv, "a");//ファイルに追記
 if(is_uploaded_file($tempfile)){ //アップロードが出来たかどうか
@@ -36,14 +36,6 @@ if(is_uploaded_file($tempfile)){ //アップロードが出来たかどうか
   echo '<h3>アップロード失敗しました</h3>'; 
 }
 echo '</div>';
-/*
-//指定フォルダに保存する場合
-$md=substr(md5($time.$upload_file),16,8);//ハッシュ関数
-$md_='./uploaded/'.$md.'.pdf';
-if(move_uploaded_file($tempfile, $md_)){//指定の場所に移動
-      echo 'アップロード完了';
-}
-*/
 
 ?>
 

@@ -1,6 +1,0 @@
-http://localhost/upload/form.html
-
-http://localhost/upload/show.php
-
-[a]:[1234]
-

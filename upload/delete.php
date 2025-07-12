@@ -9,17 +9,14 @@
 <div class="upload_text">
 <?php
    
-    $delete_file =$_POST['delete'];
-    $filepath='./uploaded/'.$delete_file;
-    //unlink('./uploaded/af1a607a.pdf');
+    $delete_file =$_POST['delete'];//削除するファイル
+    $filepath='./file/'.$delete_file;
 
-    $csvfile = 'file.csv';//現在のファイル
-    $csvfile_tmp = 'file_tmp.csv';
-    //$tempfile = 'data_temp.csv';//新しいファイル
-    //$deletecsv = $delete_file;//削除ファイル名
+    $csvfile = 'file.csv';//現在のcsvファイル
+    $csvfile_tmp = 'file_tmp.csv';//一時保存するcsvファイル
 
     $file_csv=fopen($csvfile,"r");//読み込み
-    $filetmp_csv=fopen($csvfile_tmp,"w");
+    $filetmp_csv=fopen($csvfile_tmp,"w");//書き込み
 
     $csv_data=[];
     
@@ -28,11 +25,11 @@
         while(($line = fgetcsv($file_csv,1024))!==FALSE){
             $name = $line[0];
             $summary = $line[1];
-            if($delete_file != $name){
-                fputcsv($filetmp_csv, [$name, $summary]);//削除ファイル以外の時
+            if($delete_file != $name){//削除ファイル以外の時
+                fputcsv($filetmp_csv, [$name, $summary]);
             }
         }
-        fclose($file_csv);
+        fclose($file_csv);//ファイルを閉じる
         fclose($filetmp_csv);
 
         copy($csvfile_tmp, $csvfile);
